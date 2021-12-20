@@ -1,9 +1,15 @@
-const search = () => {
-    const searchBtn = document.querySelector('.search .search-btn button');
+import getData from "./getData";
+import renderGoods from "./renderGoods";
+import { searchFilter } from "./filters";
 
-    searchBtn.addEventListener('click', () => {
-        let inputValue = document.querySelector('.search-wrapper_input').value;
-        console.log(`input.value = ${inputValue}`);
+const search = () => {
+    const searchInput = document.querySelector('.search-wrapper_input');
+
+    searchInput.addEventListener('input', (e) => {
+        const value = e.target.value; 
+       getData().then((data) => {
+        renderGoods(searchFilter(data, value));
+   });
 })
 }
 
